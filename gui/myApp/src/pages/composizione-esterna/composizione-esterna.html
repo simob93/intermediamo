@@ -1,0 +1,120 @@
+<!--
+  Generated template for the ComposizioneEsternaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Composizione Esterna</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Giardino</ion-label>
+                <ion-checkbox  (ionChange)="changeCbox($event, 'giardino')" [(ngModel)]="immobile.giardino" name="giardino"></ion-checkbox>
+            </ion-item>
+            <div [hidden]="immobile.giardino === false || !immobile.giardino">
+                <ion-item>
+                    <ion-label>Mq:</ion-label>
+                    <ion-input type="number" [(ngModel)]="immobile.mqGiardino" name="mqGiardino"></ion-input>
+                </ion-item>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Terrazzo</ion-label>
+                <ion-checkbox (ionChange)="changeCbox($event, 'terrazzo')" [(ngModel)]="immobile.terrazzo" name="terrazzo"></ion-checkbox>
+            </ion-item>
+            <div [hidden]="immobile.terrazzo === false || !immobile.terrazzo">
+                
+                <ion-item>
+                  <ion-label>Numero:</ion-label>
+                  <ion-input type="number" [(ngModel)]="immobile.numeroTerrazzo" name="numeroTerrazzo"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Mq:</ion-label>
+                    <ion-input type="number" [(ngModel)]="immobile.mqTerrazzo" name="mqTerrazzo"></ion-input>
+                </ion-item>
+
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Balcone</ion-label>
+                <ion-checkbox (ionChange)="changeCbox($event, 'balcone')" [(ngModel)]="immobile.balcone" name="balcone"></ion-checkbox>
+            </ion-item>
+            <div [hidden]="immobile.balcone === false || !immobile.balcone">
+                
+                <ion-item>
+                  <ion-label>Numero:</ion-label>
+                  <ion-input type="number" [(ngModel)]="immobile.numeroBalcone" name="numeroBalcone"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Mq:</ion-label>
+                    <ion-input type="number" [(ngModel)]="immobile.mqBalcone" name="mqBalcone"></ion-input>
+                </ion-item>
+
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Canna fumaria</ion-label>
+                <ion-checkbox [(ngModel)]="immobile.cannaFumaria" name="cannaFumaria"></ion-checkbox>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Cappotto</ion-label>
+                <ion-checkbox [(ngModel)]="immobile.cappotto" name="cappotto"></ion-checkbox>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Pannelli solari</ion-label>
+                <ion-checkbox [(ngModel)]="immobile.pannelliSolari" name="pannelliSolari"></ion-checkbox>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Fotovoltaico</ion-label>
+                <ion-checkbox [(ngModel)]="immobile.fotovoltaico" name="fotovoltaico"></ion-checkbox>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card> 
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Posto auto</ion-label>
+                <ion-checkbox [(ngModel)]="immobile.postoAuto" name="postoAuto"></ion-checkbox>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

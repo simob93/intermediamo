@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contatti</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="insertContatto()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar></ion-searchbar>
+    <ion-item-group *ngFor="let cont of listaContatti">
+        <ion-item-divider color="light">{{cont.lettera}}</ion-item-divider>
+        <ion-item (click)="itemClick(contact)" *ngFor="let contact of cont.contatto">{{contact.nome}} {{contact.cognome}}</ion-item>
+    </ion-item-group>
+</ion-content>
+
+

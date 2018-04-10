@@ -1,0 +1,61 @@
+<!--
+  Generated template for the DatiGeneraliPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dati generali</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form>
+    <ion-list>
+      
+      <ion-item>
+        <ion-label>Tipologia immobile</ion-label>
+        <ion-select [(ngModel)]="immobile.tipologia" name="tipologia">
+          <ion-option *ngFor ="let item of tipologie" [value]="item.codice">{{item.valore}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Mq (netti):</ion-label>
+          <ion-input type="number" [(ngModel)]="immobile.mqNetti" name="mqNetti"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Mq (comm):</ion-label>
+          <ion-input type="number" [(ngModel)]="immobile.mqComm" name="mqComm"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Unità totali:</ion-label>
+          <ion-input type="number" [(ngModel)]="immobile.unitaTotali" name="unitaTotali"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Piano:</ion-label>
+          <ion-input type="number" [(ngModel)]="immobile.piano" name="piano"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Tot piani:</ion-label>
+          <ion-input type="number" [(ngModel)]="immobile.totPiani" name="totPiani"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Esposizione</ion-label>
+          <ion-select [(ngModel)]="immobile.esposizione" name="esposizione" multiple>
+            <ion-option *ngFor ="let item of esposizione" [value]="item.codice">{{item.valore}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+    </ion-list>
+</form>
+</ion-content>

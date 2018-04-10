@@ -1,0 +1,30 @@
+<!--
+  Generated template for the ComposizioneInternaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Composizione interna</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <card-check title="Ingresso-Disbrigo" (checkchange)="immobile.ingressoDisbrigo = $event" [(checkName)]="immobile.ingressoDisbrigo"></card-check>
+  <card-check title="Soggiorno-Cottura" (checkchange)="immobile.soggiornoCottura = $event" [(checkName)]="immobile.soggiornoCottura"></card-check>
+  <card-check title="Cucina abitabile" (checkchange)="immobile.cucinaAbitabile = $event" [(checkName)]="immobile.cucinaAbitabile"></card-check>
+  <card-check title="Cucinotto" (checkchange)="immobile.cucinotto = $event" [(checkName)]="immobile.cucinotto"></card-check>
+  <card-check title="Soggiorno" (checkchange)="immobile.soggiorno = $event" [(checkName)]="immobile.soggiorno"></card-check>
+  <card-check title="Camera matrimoniale" (checkchange)="immobile.cameraMatrimoniale = $event" [(checkName)]="immobile.cameraMatrimoniale"></card-check>
+  <card-check title="Cameretta" (checkchange)="immobile.cameretta = $event" [(checkName)]="immobile.cameretta"></card-check>
+  <card-check title="Studio" (checkchange)="immobile.studio = $event" [(checkName)]="immobile.studio"></card-check>
+  <card-check title="Ripostiglio" (checkchange)="immobile.ripostiglio = $event" [(checkName)]="immobile.ripostiglio"></card-check>
+  <card-check title="Sottotetto" (checkchange)="immobile.sottoTetto = $event" [(checkName)]="immobile.sottoTetto"></card-check>
+  <card-check title="Stube" (checkchange)="immobile.stube = $event" [(checkName)]="immobile.stube"></card-check>
+  <card-check title="Bagni" (checkchange)="immobile.agni = $event" [(checkName)]="immobile.bagni"></card-check>
+  
+</ion-content>
