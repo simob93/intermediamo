@@ -14,21 +14,28 @@ import { DatiGeneraliPage } from '../pages/dati-generali/dati-generali';
 import { ComposizioneEsternaPage } from '../pages/composizione-esterna/composizione-esterna';
 import { ComposizioneInternaPage } from '../pages/composizione-interna/composizione-interna';
 import { CardCheckComponent } from '../components/card-check/card-check';
+import { ListItemComponent } from '../components/list-item/list-item';
 import { LoginPage } from '../pages/login/login';
-
+import { VincoliPage } from '../pages/vincoli/vincoli';
+import { AllegatiPage } from '../pages/allegati/allegati';
+import { RapportoPage } from '../pages/rapporto/rapporto';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {Standard} from '../standard/standard';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { ImmobileProvider } from '../providers/immobile/immobile';
+import { RapportoProvider } from '../providers/rapporto/rapporto';
+//import { AllegatiProvider } from '../providers/allegati/allegati'; 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
+    ListItemComponent,
     ContattiPage,
     EditContattoPage,
     MenuImmobilePage,
@@ -37,7 +44,10 @@ import { HttpClientModule } from '@angular/common/http';
     ComposizioneEsternaPage,
     ComposizioneInternaPage,
     CardCheckComponent,
-    LoginPage
+    LoginPage,
+    VincoliPage,
+    AllegatiPage,
+    RapportoPage
     
   ],
   imports: [
@@ -51,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     ListPage,
+    ListItemComponent,
     ContattiPage,
     EditContattoPage,
     MenuImmobilePage,
@@ -59,7 +70,10 @@ import { HttpClientModule } from '@angular/common/http';
     ComposizioneEsternaPage,
     ComposizioneInternaPage,
     CardCheckComponent,
-    LoginPage
+    LoginPage,
+    VincoliPage,
+    AllegatiPage,
+    RapportoPage
   ],
   providers: [
     StatusBar,
@@ -67,6 +81,9 @@ import { HttpClientModule } from '@angular/common/http';
     Standard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
+    ImmobileProvider,
+    RapportoProvider,
+    //AllegatiProvider,
     ]
 })
 export class AppModule {}

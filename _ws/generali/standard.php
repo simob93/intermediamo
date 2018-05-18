@@ -15,6 +15,9 @@ class Standard {
         }
         return $class;
     }
+    function isTrueValue($value) {
+        return $value ? "T" : "F";
+    }
 }
 
 ?>

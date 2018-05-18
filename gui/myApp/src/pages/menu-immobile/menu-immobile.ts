@@ -4,6 +4,9 @@ import { DatiCostruzionePage } from '../../pages/dati-costruzione/dati-costruzio
 import { DatiGeneraliPage } from '../../pages/dati-generali/dati-generali';
 import { ComposizioneEsternaPage } from '../../pages/composizione-esterna/composizione-esterna';
 import { ComposizioneInternaPage } from '../../pages/composizione-interna/composizione-interna';
+import { ImmobileProvider, ImmobileForm } from '../../providers/immobile/immobile';
+import { AllegatiPage } from '../allegati/allegati';
+import {Standard} from '../../standard/standard';
 
 
 /**
@@ -18,69 +21,102 @@ import { ComposizioneInternaPage } from '../../pages/composizione-interna/compos
   selector: 'page-menu-immobile',
   templateUrl: 'menu-immobile.html',
 })
+
+
 export class MenuImmobilePage {
-  object: {} = {};
-  menuImmobile: Array<{titolo:String, page: any, objKey: any}>;  
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  object: ImmobileForm = new ImmobileForm();
+  enableAllegati:boolean = false;
+  menuImmobile: Array<{titolo:String, page: any, img:any}>;  
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public immobileService:ImmobileProvider,
+    public standard:Standard) {
   
 }
 /**
- * 
+ *  metodo per il salvataggio dell'immobile,
+ *  le tab "dati generali e datiCostruzione" 
+ *  compongono il record di testata
  */
 clickBtnConfirm() {
-  debugger;
+  
+  let idContatto = parseInt(this.navParams.get('idContatto'));
+  Object.assign(this.object, {idContatto});
+
+  this.immobileService.saveImmobile(this.object).subscribe(res => {
+
+      this.standard.showErrorMessage(res['message']);
+      const id = res['data'];
+      //abilito il bottone allegati
+      this.enableAllegati = id !== null ;
+      Object.assign(this.object, {id});
+      
+  },error => {
+    //errore di sessione
+    if (error.status === 401) {
+        localStorage.setItem('login', 'F');
+    }
+  });
 }
 /**
  * 
  * @param menuItem 
  */
   itemClick(menuItem) {
-    
-    
 
     this.navCtrl.push(menuItem.page, {
-        valoriForm: this.object[menuItem.objKey],
-        
+        valoriForm: this.object,
+        /**
+         * funzione di callback che viene eseguita ogni 
+         * volta che viene richiamo il "back button"
+         */
         callbackfn: (params) => {
-          this.object[menuItem.objKey] = {};
-          Object.assign(this.object[menuItem.objKey], params)
+            Object.assign(this.object, params)
         }
     });
 
   }
 
   ionViewDidLoad() {
-    //menu "Scheda immobile"
+    //menu "Scheda immobile" 
     this.menuImmobile = [
         {
           titolo: 'Dati di costruzione',
           page: DatiCostruzionePage,
-          objKey: 'datiCostruzione'
+          img: 'costruzione'
         },
         {
           titolo: 'Dati generali',
           page: DatiGeneraliPage,
-          objKey: 'datiGenerali'
+          img: 'generali'
         },
         {
           titolo: 'Composizione esterna',
           page: ComposizioneEsternaPage,
-          objKey: 'composizioneEsterna',
+          img: 'esterna'
         },
         {
           titolo: 'Composizione interna',
           page: ComposizioneInternaPage,
-          objKey: 'composizioneInterna'
+          img: 'interna'
         },
         {
           titolo: 'Riscaldamento e varie',
           page: null,
-          objKey: null
+          img: 'riscaldamento'
         },
         {
           titolo: 'Vincoli',
           page: null,
-          objKey: null
+          img: 'vincoli'
+        },
+        {
+          titolo: 'Allegati',
+          page: AllegatiPage,
+          img: 'allegati',
+
         }
     ]
   }

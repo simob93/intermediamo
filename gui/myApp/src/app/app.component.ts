@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { ContattiPage } from '../pages/contatti/contatti';
+import { RapportoPage } from '../pages/rapporto/rapporto';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +24,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage, iconCls: '' },
-      { title: 'Nuovo immobile', component: ContattiPage, iconCls: 'home' }
+      { title: 'Home', component: HomePage, iconCls: 'home' },
+      { title: 'Nuovo immobile', component: ContattiPage, iconCls: 'add-circle' },
+      { title: 'Rapporto giornata', component: RapportoPage, iconCls: 'search' },      
+      { title: 'Setting', component: RapportoPage, iconCls: 'settings' },
+
     ];
 
   }

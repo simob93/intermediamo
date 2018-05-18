@@ -7,8 +7,7 @@ class ContattiService {
     
     function getManager() {
         return new ContattiManager();
-    }
-    
+    }  
     function save($contatto) {
         $success =true;
         $data = null;
@@ -46,13 +45,13 @@ class ContattiService {
         return $data -> jsonSerialize();
     }
 
-    function listFormatted() {
+    function listFormatted($search = null) {
         $success =true;
         $data = null;
         $messagge = array();
         try {
             
-            $data = $this->getManager()->listFormatted();
+            $data = $this->getManager()->listFormatted($search);
             array_push($messagge, Costanti::OPERAZIONE_OK);
 
         } catch (Exception $e) {

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the RapportoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Rapporto</ion-title>
+  </ion-navbar>
+  <ion-segment  [(ngModel)]="frequency"  color="orange">
+      <ion-segment-button value="today">
+        <b>Giornata</b>
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        <b>Storico</b>
+      </ion-segment-button>
+  </ion-segment>
+  <ion-toolbar>
+      <ion-row>
+          <ion-col col-2>
+           <img width="24" (click) ="onClickIcon('left')" src="image/left-arrow.svg" />
+          </ion-col>
+          <ion-col style="text-align: center;">
+            <img align="center" width="24" src="image/calendar.svg" />
+            <label style="margin-left: 5px; color: #fff;">{{ startDateFormatted }}</label>
+          </ion-col>
+          <ion-col col-2  style="text-align: right;">
+              <img color="orange" (click) ="onClickIcon('right')" width="24" src="image/right-arrow.svg" />
+          </ion-col>
+        </ion-row>
+  </ion-toolbar>
+  
+</ion-header>
+<ion-content>
+  <ion-slides #slides (ionSlideDidChange) = "slideDidChange(event)" initialSlide="1">
+    <ion-slide>
+      
+    </ion-slide>
+    <ion-slide>
+
+      <div *ngIf="isFetching === true">
+          <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+
+      <div *ngIf="isFetching === false">
+        <div *ngFor="let item of data">
+          <list-item [data]="item.insertData" [descrizione]="item.nominativo"></list-item>
+        </div>
+      </div>
+    
+    </ion-slide>
+    <ion-slide>
+    </ion-slide>
+  </ion-slides>
+  
+</ion-content>

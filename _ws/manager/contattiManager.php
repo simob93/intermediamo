@@ -25,9 +25,9 @@ class ContattiManager {
      *  formattato ad elenco telefonico
      *  raggruppato per lettere dell'alfabeto 
      */
-    function listFormatted() {
+    function listFormatted($search = null) {
         
-        $listContatti = $this->getList(); 
+        $listContatti = $this->getList($search); 
         $result = array();
         if (isset($listContatti) && count($listContatti) > 0) {
             
@@ -57,19 +57,27 @@ class ContattiManager {
      * metodo che ritorna una lista ordinata per "cognome ASC"
      * della tabella contatti
      */
-    function getList() {
+    function getList($search = null) {
         
         $data = null;
         $conn = null;
         try {
 
             $conn = $this -> getSession();
-            $stmt = $conn -> prepare(
-                "SELECT ID as id, NOME as nome, COGNOME as cognome, 
-                DATADINASCITA as dataDiNascita, CODICEFISCALE as codFiscale 
-                FROM contatti as c
-				ORDER BY c.cognome ASC "
-            );
+            $sql = "SELECT ID as id, NOME as nome, COGNOME as cognome, 
+                           DATADINASCITA as dataDiNascita, CODICEFISCALE as codFiscale 
+                    FROM contatti as c ";
+            
+            if (isset($search)) {
+                $search = "'%{$search}%'";
+                
+                $sql .= "WHERE c.COGNOME LIKE " .$search." OR c.NOME LIKE ".$search;
+            }
+
+            $sql .= " ORDER BY c.COGNOME ASC";  
+
+            $stmt = $conn -> prepare($sql);
+
             $stmt -> execute();
             $data = $stmt -> fetchAll(PDO::FETCH_CLASS, "Contatti");
            

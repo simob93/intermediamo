@@ -19,7 +19,7 @@ import { Navbar } from 'ionic-angular';
 export class DatiGeneraliPage {
   immobile: any= {};
   tipologie:Array<{codice: Number, valore: String}>;
-  esposizione:Array<{codice: Number, valore: String}>;
+  esposizione:Array<{codice: String, valore: String}>;
 
   @ViewChild(Navbar) navBar: Navbar;
 
@@ -60,19 +60,19 @@ export class DatiGeneraliPage {
       ];
       this.esposizione = [
           {
-            codice: 1,
+            codice: 'N',
             valore: 'Nord'
           },
           {
-            codice: 2,
+            codice: 'S',
             valore: 'Sud'
           },
           {
-            codice: 3,
+            codice: 'E',
             valore: 'Est'
           },
           {
-            codice: 4,
+            codice: 'O',
             valore: 'Ovest'
           }
       ]
@@ -88,6 +88,9 @@ export class DatiGeneraliPage {
 
     this.navBar.backButtonClick = (e:UIEvent)=>{
         if (callbackfn) {
+            if (this.immobile.esposizione != null) {
+              this.immobile.esposizione = this.immobile.esposizione.toString();
+            } 
             callbackfn(this.immobile);
         }
         this.navCtrl.pop();

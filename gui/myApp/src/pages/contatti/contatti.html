@@ -13,10 +13,16 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
     <ion-item-group *ngFor="let cont of listaContatti">
         <ion-item-divider color="light">{{cont.lettera}}</ion-item-divider>
-        <ion-item (click)="itemClick(contact)" *ngFor="let contact of cont.contatto">{{contact.nome}} {{contact.cognome}}</ion-item>
+        
+        <ion-item (click)="itemClick(contact)" *ngFor="let contact of cont.contatto">
+            <ion-avatar item-start style="background: #E0F7FA; color:#1565C0; border-radius: 50%; text-align: center;">
+                <span style="line-height:2.5; font-weight: bold;">{{contact.alias}}</span>     
+            </ion-avatar>
+            {{contact.nome}} {{contact.cognome}}
+        </ion-item>
     </ion-item-group>
 </ion-content>
 

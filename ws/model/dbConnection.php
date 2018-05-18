@@ -8,6 +8,7 @@ class DbConnection {
 
             try {
                 $dbh = new PDO('mysql:host=localhost;dbname=intermediamo', "root", "root");
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->conn = $dbh;
             } catch (PDOException $e) {
                 $this->conn = null;
@@ -17,7 +18,6 @@ class DbConnection {
         }
         return $this->conn;
     }
-
 }
 
 ?>

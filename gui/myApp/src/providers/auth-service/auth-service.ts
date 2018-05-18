@@ -39,7 +39,7 @@ export class AuthServiceProvider {
   constructor(public http: HttpClient) {
   }
   public login(credentials:User):Observable<User> {
-    return this.http.post<User>(constants.API_URL + 'auth/doLogin.php', credentials);
+    return this.http.post<User>(constants.API_URL + 'login/doLogin', credentials);
   }
  
   public register(credentials) {

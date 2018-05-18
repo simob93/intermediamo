@@ -12,6 +12,19 @@ import {Standard} from '../../standard/standard';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+export class Contatti {
+    id: number;
+    nome: string = null;
+    cognome: string = null;
+    dataDiNascita: Date = null;
+    codiceFiscale: string = null;
+    email: string = null;
+    telefono: string = null;
+    via: string = null;
+    cap: string = null;
+    provincia: string = null;
+    citta: string = null;
+}
 
 @IonicPage()
 @Component({
@@ -20,7 +33,7 @@ import {Standard} from '../../standard/standard';
 })
 export class EditContattoPage {
   titleBar: String = 'Modifica contatto'
-  contatto:any = {};
+  contatto:Contatti = new Contatti();
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -38,7 +51,7 @@ export class EditContattoPage {
         this.contatto.cognome =  this.contatto.cognome.toUpperCase();
       }
       if (this.standard.isEmpty(id)) {
-        this.http.post(constants.API_URL + 'contatti/contatti_save.php', this.contatto).map(res => res.json()).subscribe(risposta => {
+        this.http.post(constants.API_URL + 'contatti/save', this.contatto).map(res => res.json()).subscribe(risposta => {
             this.standard.showErrorMessage(risposta.message);
         });
       }

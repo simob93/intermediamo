@@ -36,7 +36,7 @@ export class ComposizioneEsternaPage {
       if (!this.standard.isEmpty(name)) {
        
             let str = name[0].toUpperCase() + name.substr(1, name.lenght),
-            nameNumero = 'numero' + str,
+            nameNumero = 'num' + str,
             nameMq = 'mq' + str; 
 
           if (this.immobile[nameNumero] && !event.value) {

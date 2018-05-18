@@ -19,9 +19,13 @@
 
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of menuImmobile" (click)="itemClick(item)">
-      {{ item.titolo }} <!--<ion-icon name="arrow-forward" item-right></ion-icon>!-->
+  <ion-list style="margin-top: 10px;">
+    <button style="color: #FB8C00"  [disabled]="item.img === 'allegati' && !enableAllegati" ion-item *ngFor="let item of menuImmobile" (click)="itemClick(item)">
+      <ion-avatar item-start>
+          <img src="image/{{item.img}}.svg"/>     
+      </ion-avatar>
+      {{ item.titolo }}<!--<ion-icon name="arrow-forward" item-right></ion-icon>!-->
+      <ion-icon item-end name="arrow-forward"></ion-icon>
       
     </button>  
   </ion-list>

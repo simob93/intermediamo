@@ -1,1 +1,1 @@
-export const API_URL: string = 'http://localhost/intermediamo/ws/';
+export const API_URL: string = 'http://192.168.1.2/intermediamo/ws/';
