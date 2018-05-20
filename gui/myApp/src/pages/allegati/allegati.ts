@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { 
+  IonicPage, 
+  NavController, 
+  NavParams,
+  LoadingController } from 'ionic-angular';
 import { AllegatiProvider } from '../../providers/allegati/allegati';
 import {Standard} from '../../standard/standard';
 
@@ -25,6 +29,7 @@ export class AllegatiPage {
     public navCtrl: NavController, 
     public standard: Standard,
     public allegatiService: AllegatiProvider,
+    public loading: LoadingController,
     public navParams: NavParams) {
 
   }
@@ -33,19 +38,27 @@ export class AllegatiPage {
    * @param event 
    */
   onChange(event) {
-      let file = event.target.files[0];
-      let c = new FileReader()
+      let file = event.target.files[0],
+          c = new FileReader()
 
-      c.onload = (e:Event) => { 
+      c.onload = (e:Event) => {
+        let { id } = this.navParams.get('valoriForm'); 
         let params = {
-           idImmobile: this.navParams.get('valoriForm').id,
+           idImmobile: id,
            nome: file.name,
            file: e.target['result'] //recupero il base 64
         }
-
+        let loading = this.loading.create({
+            content: 'Caricamento file in corso....'
+        });
+        //inizio il caricamento
+        loading.present();
         this.allegatiService.upload(params).subscribe(response => {
+            //arresto il carciamento
+            loading.dismiss();
             this.standard.showErrorMessage(response['message']);
             this.getByContatto();
+           
         })
       }
       c.readAsDataURL(file);
@@ -53,14 +66,15 @@ export class AllegatiPage {
   }
 
   link(allegato) {
-    let {id} = allegato; 
+    let { id } = allegato; 
     this.allegatiService.link(id).subscribe(response => {
       window.open(response.data,'_blank')
   });
   }
 
   getByContatto() {
-    this.allegatiService.getByContatto(this.navParams.get('valoriForm').id).subscribe(response => {
+    let { id } = this.navParams.get('valoriForm');
+    this.allegatiService.getByContatto(id).subscribe(response => {
         this.listAllegati = response.data;
     });
   }

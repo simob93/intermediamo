@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
@@ -15,6 +15,7 @@ import { ComposizioneEsternaPage } from '../pages/composizione-esterna/composizi
 import { ComposizioneInternaPage } from '../pages/composizione-interna/composizione-interna';
 import { CardCheckComponent } from '../components/card-check/card-check';
 import { ListItemComponent } from '../components/list-item/list-item';
+import { CtaMenuComponent } from '../components/cta-menu/cta-menu';
 import { LoginPage } from '../pages/login/login';
 import { VincoliPage } from '../pages/vincoli/vincoli';
 import { AllegatiPage } from '../pages/allegati/allegati';
@@ -28,11 +29,12 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ImmobileProvider } from '../providers/immobile/immobile';
 import { RapportoProvider } from '../providers/rapporto/rapporto';
-//import { AllegatiProvider } from '../providers/allegati/allegati'; 
+
 
 @NgModule({
   declarations: [
     MyApp,
+    CtaMenuComponent,
     HomePage,
     ListPage,
     ListItemComponent,
@@ -54,11 +56,14 @@ import { RapportoProvider } from '../providers/rapporto/rapporto';
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    //EditContattoPage,
     IonicModule.forRoot(MyApp),
+    //IonicPageModule.forChild(EditContattoPage)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    CtaMenuComponent,
     HomePage,
     ListPage,
     ListItemComponent,

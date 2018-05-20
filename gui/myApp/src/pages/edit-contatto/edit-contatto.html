@@ -5,76 +5,85 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{titleBar}}</ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only (click)="clickBtnConfirm()">
-            <ion-icon name="checkmark"></ion-icon>
-        </button>
-    </ion-buttons>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content>
-    <form>
-        <ion-list>
-          <ion-item hidden>
-              <ion-label>id</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.id" name="id" ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Nome</ion-label>
-            <ion-input type="text" [(ngModel)]="contatto.nome" name="nome"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label>Cognome</ion-label>
-            <ion-input type="text" [(ngModel)]="contatto.cognome" name="cognome"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Data di Nascita</ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="contatto.dataDiNascita" name="dataDiNascita"></ion-datetime>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Codicefiscale</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.codiceFiscale" name="codiceFiscale"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Telefono</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.telefono" name="telefono"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Via</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.via" name="via"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Cap</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.cap" name="cap"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Provincia</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.provincia" name="provincia"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Citta</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.citta" name="citta"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label>Email</ion-label>
-              <ion-input type="text" [(ngModel)]="contatto.email" name="email"></ion-input>
-          </ion-item>
+    
+      <ion-navbar>
+        <ion-title>{{titleBar}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="clickBtnConfirm()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content>
+        <form>
+            <ion-list>
+              <ion-item hidden>
+                  <ion-label>id</ion-label>
+                  <ion-input 
+                    type="text" 
+                    [(ngModel)]="contatto.id" 
+                    name="id" >
+                  </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Nome</ion-label>
+                <ion-input
+                  type="text" 
+                  [(ngModel)]="contatto.nome" 
+                  name="nome">
+                </ion-input>
+              </ion-item>
             
-        </ion-list>
-    </form>
-</ion-content>
+              <ion-item>
+                <ion-label>Cognome</ion-label>
+                <ion-input type="text" [(ngModel)]="contatto.cognome" name="cognome"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Data di Nascita</ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="contatto.dataDiNascita" name="dataDiNascita"></ion-datetime>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Codicefiscale</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.codiceFiscale" name="codiceFiscale"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Telefono</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.telefono" name="telefono"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Via</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.via" name="via"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Cap</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.cap" name="cap"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Provincia</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.provincia" name="provincia"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Citta</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.citta" name="citta"></ion-input>
+              </ion-item>
+    
+              <ion-item>
+                  <ion-label>Email</ion-label>
+                  <ion-input type="text" [(ngModel)]="contatto.email" name="email"></ion-input>
+              </ion-item>
+                
+            </ion-list>
+        </form>
+    </ion-content>
+    

@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { 
+  Component, 
+  Input, 
+  Output, 
+  EventEmitter } from '@angular/core';
 
 import * as moment from 'moment';
 import 'moment/locale/it';
@@ -16,11 +20,15 @@ import 'moment/locale/it';
 export class ListItemComponent {
 
   @Input('data') data: any;
+  @Input('icon') icon: any;
+  @Input('record') record: any;
   @Input('descrizione') descrizione: String;
+  @Output('onClickItem') onClickItem : EventEmitter<any> = new EventEmitter();
   formatattedData: any
-
   constructor() {
-    this.formatattedData = moment(this.data).format("HH:mm")
   }
-
+  clickItem() {   
+    this.onClickItem.emit(this.record);
+  }
+   
 }

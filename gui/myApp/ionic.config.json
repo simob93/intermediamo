@@ -2,7 +2,14 @@
   "name": "myApp",
   "app_id": "",
   "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/intermediamo/ws",
+      "proxyUrl": "http://192.168.1.2"
+    }
+  ],
   "integrations": {
     "cordova": {}
+    
   }
 }

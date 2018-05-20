@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { 
+  IonicPage,
+  NavController,
+  NavParams } from 'ionic-angular';
+
 import { DatiCostruzionePage } from '../../pages/dati-costruzione/dati-costruzione';
 import { DatiGeneraliPage } from '../../pages/dati-generali/dati-generali';
 import { ComposizioneEsternaPage } from '../../pages/composizione-esterna/composizione-esterna';
 import { ComposizioneInternaPage } from '../../pages/composizione-interna/composizione-interna';
-import { ImmobileProvider, ImmobileForm } from '../../providers/immobile/immobile';
+
+import { 
+  ImmobileProvider, 
+  ImmobileForm } from '../../providers/immobile/immobile';
+
 import { AllegatiPage } from '../allegati/allegati';
 import {Standard} from '../../standard/standard';
 
@@ -33,7 +41,46 @@ export class MenuImmobilePage {
     public navParams: NavParams,
     public immobileService:ImmobileProvider,
     public standard:Standard) {
-  
+      
+    //menu "Scheda immobile" 
+    this.menuImmobile = [
+      {
+        titolo: 'Dati di costruzione',
+        page: DatiCostruzionePage,
+        img: 'costruzione'
+      },
+      {
+        titolo: 'Dati generali',
+        page: DatiGeneraliPage,
+        img: 'generali'
+      },
+      {
+        titolo: 'Composizione esterna',
+        page: ComposizioneEsternaPage,
+        img: 'esterna'
+      },
+      {
+        titolo: 'Composizione interna',
+        page: ComposizioneInternaPage,
+        img: 'interna'
+      },
+      {
+        titolo: 'Riscaldamento e varie',
+        page: null,
+        img: 'riscaldamento'
+      },
+      {
+        titolo: 'Vincoli',
+        page: null,
+        img: 'vincoli'
+      },
+      {
+        titolo: 'Allegati',
+        page: AllegatiPage,
+        img: 'allegati',
+
+      }
+    ]
 }
 /**
  *  metodo per il salvataggio dell'immobile,
@@ -53,7 +100,7 @@ clickBtnConfirm() {
       this.enableAllegati = id !== null ;
       Object.assign(this.object, {id});
       
-  },error => {
+  }, error => {
     //errore di sessione
     if (error.status === 401) {
         localStorage.setItem('login', 'F');
@@ -65,7 +112,7 @@ clickBtnConfirm() {
  * @param menuItem 
  */
   itemClick(menuItem) {
-
+    
     this.navCtrl.push(menuItem.page, {
         valoriForm: this.object,
         /**
@@ -80,45 +127,19 @@ clickBtnConfirm() {
   }
 
   ionViewDidLoad() {
-    //menu "Scheda immobile" 
-    this.menuImmobile = [
-        {
-          titolo: 'Dati di costruzione',
-          page: DatiCostruzionePage,
-          img: 'costruzione'
-        },
-        {
-          titolo: 'Dati generali',
-          page: DatiGeneraliPage,
-          img: 'generali'
-        },
-        {
-          titolo: 'Composizione esterna',
-          page: ComposizioneEsternaPage,
-          img: 'esterna'
-        },
-        {
-          titolo: 'Composizione interna',
-          page: ComposizioneInternaPage,
-          img: 'interna'
-        },
-        {
-          titolo: 'Riscaldamento e varie',
-          page: null,
-          img: 'riscaldamento'
-        },
-        {
-          titolo: 'Vincoli',
-          page: null,
-          img: 'vincoli'
-        },
-        {
-          titolo: 'Allegati',
-          page: AllegatiPage,
-          img: 'allegati',
+    
+    let record = this.navParams.get('record'); 
 
-        }
-    ]
+    if (record) {
+       let { idImmobile } = record;
+       if (idImmobile) {
+          this.immobileService.getById(idImmobile).subscribe(response => {
+              
+              this.object = response['data'][0];
+              this.enableAllegati = true;
+          });
+      }
+    }
   }
 
 }

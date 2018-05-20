@@ -60,11 +60,26 @@ export class ImmobileProvider {
   constructor(public http: Http) {
 
   }
+  /**
+   * 
+   * @param object 
+   */
   saveImmobile(object: ImmobileForm) {
        //validazione del token
     let headers = new Headers({ 'Authorization': 'Bearer '+ localStorage.getItem('token') });  
     let options = new RequestOptions({headers: headers});
     return this.http.post(constants.API_URL + 'immobile/save' , object, options).map(res => res.json());
   }
+  /**
+   * 
+   * @param id 
+   */
+  getById(id: number) {
+    //validazione del token
+    let headers = new Headers({ 'Authorization': 'Bearer '+ localStorage.getItem('token') });  
+    let options = new RequestOptions({headers: headers, params: {id}});
+    
+    return this.http.get(constants.API_URL + 'immobile/getById' , options).map(res => res.json()); 
+}
 
 }

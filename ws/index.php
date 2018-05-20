@@ -28,8 +28,12 @@ $container["token"] = function($c) {
 
 $app->add(new Tuupola\Middleware\JwtAuthentication([
 	"path" => "/*", /* or ["/api", "/admin"] */
-	"ignore" => "/login/doLogin",
-    "secret" => "12345678"
+	"ignore" => "/*",
+	"secret" => "12345678",
+	"relaxed" => [
+		"localhost",
+		"192.168.1.2"
+    ],
 ]));
 
 
@@ -181,6 +185,7 @@ $app->post('/immobile/save', function (Request $request, Response $response, $ar
 	$success = true;
 	$id = null;
 	$message = array();
+	$insertData = date("Y-m-d H:i");
 	
 	$sql = 'INSERT INTO immob
 			(
@@ -188,8 +193,8 @@ $app->post('/immobile/save', function (Request $request, Response $response, $ar
 				PIANO,TOTPIANI,ESPOSIZIONE,GIARDINO,MQGIARDINO, TERRAZZO, MQTERRAZZO, NUMEROTERRAZZO, BALCONE,
 				NUMEROBALCONE,MQBALCONE,CANNAFUMARIA,CAPPOTTO,PANNELLISOLARI,FOTOVOLTAICO,POSTOAUTO,INGRESSODISBRIGO,
 				CUCINAABITABILE,CUCINOTTO,SOGGIORNOCOTTURA,SOGGIORNO,CAMERAMATRIMONIALE,CAMERETTA,STUDIO,
-				RIPOSTIGLIO,SOTTOTETTO, BAGNI, STUBE, IDCONTATTO)
-		values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+				RIPOSTIGLIO,SOTTOTETTO, BAGNI, STUBE, IDCONTATTO, INSERTDATA)
+		values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)';
 
 	try {
 
@@ -232,6 +237,7 @@ $app->post('/immobile/save', function (Request $request, Response $response, $ar
 		$stmt -> bindParam(35, $params["bagni"], PDO::PARAM_STR);
 		$stmt -> bindParam(36, $params["stube"], PDO::PARAM_STR);
 		$stmt -> bindParam(37, $params["idContatto"], PDO::PARAM_INT);
+		$stmt -> bindParam(38, $insertData, PDO::PARAM_STR);
 	
 		$stmt -> execute();
 		$id = $conn->lastInsertId();
@@ -385,7 +391,8 @@ $app->get('/rapporti/list', function (Request $request, Response $response, $arg
 		$sql = "SELECT immo.ID as idImmobile, cont.ID as idContatto, CONCAT(cont.nome, ' ', cont.cognome) as nominativo,  immo.INSERTDATA as insertData
 				FROM immob as immo INNER JOIN contatti as cont
 				ON cont.ID = immo.IDCONTATTO
-				WHERE immo.INSERTDATA >= ? AND immo.INSERTDATA <= ? ";
+				WHERE immo.INSERTDATA >= ? AND immo.INSERTDATA <= ? 
+				ORDER BY immo.insertData";
 		
 		$success = true;
 		$message = array();
@@ -409,6 +416,78 @@ $app->get('/rapporti/list', function (Request $request, Response $response, $arg
 		//popolo la mia calsse (viene esegutio il costruttore)
 		echo json_encode(array("success" => $success, "message"=>$message, "data" =>$data));	
 });
+
+$app->get('/immobile/getById', function (Request $request, Response $response, $args) {
+	
+		$connection = new DbConnection();
+		$conn = $connection -> getDbConnection();
+		//recupero i parametri di get
+		$params = $request->getQueryParams();
+		
+		$sql = 'SELECT
+		ID as id,
+		DATA_ACQUISTO as dataAcquisto,
+		ANNOCOSTRUZIONE as annoCostruzione,
+		DATA_RISTRUTTURATO as dataRistrutturato,
+		COSTRUITODA as costruitoDa,
+		TIPOLOGIA as tipologia,
+		MQNETTI as mqNetti,
+		MQCOMM as mqComm,
+		UNITATOT as unitaTot,
+		PIANO as piano,
+		TOTPIANI as totPiani,
+		ESPOSIZIONE as esposizione,
+		GIARDINO as giardino,
+		MQGIARDINO as mqGiardino, 
+		TERRAZZO as terrazzo, 
+		MQTERRAZZO as mqTerrazzo, 
+		NUMEROTERRAZZO as numTerrazzo, 
+		BALCONE as balcone,
+		NUMEROBALCONE as numBalcone,
+		MQBALCONE as mqBalcone,
+		CANNAFUMARIA as cannafumaria,
+		CAPPOTTO as cappotto,
+		PANNELLISOLARI as pannelliSolari,
+		FOTOVOLTAICO as fotovoltaico,
+		POSTOAUTO as postoAuto,
+		INGRESSODISBRIGO as ingressoDisbrigo,
+		CUCINAABITABILE as cucinaAbitabile,
+		CUCINOTTO as cucinotto,
+		SOGGIORNOCOTTURA as soggiornoCottura,
+		SOGGIORNO as soggiorno,
+		CAMERAMATRIMONIALE as cameraMatrimoniale,
+		CAMERETTA as cameretta,
+		STUDIO as studio,
+		RIPOSTIGLIO as ripostiglio,
+		SOTTOTETTO as sottoTetto,
+		BAGNI as bagni, 
+		STUBE as stube,
+		IDCONTATTO as idContatto
+
+		FROM immob i 
+		WHERE i.ID = ?';
+		
+		$success = true;
+		$message = array();
+		$data = null;
+		try {
+
+			$stmt = $conn -> prepare($sql);
+
+			$stmt -> bindParam(1, $params['id'], PDO::PARAM_INT);
+			$stmt -> execute();
+
+			$data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+			array_push($message, Costanti::OPERAZIONE_OK);
+
+		} catch (Exception $e) {
+			$success = false;
+			array_push($message, Costanti::OPERAZIONE_KO, $e -> getMessage());
+		}
+		//popolo la mia calsse (viene esegutio il costruttore)
+		echo json_encode(array("success" => $success, "message"=>$message, "data" =>$data));	
+});
+
 
 
 $app->run();

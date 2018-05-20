@@ -14,6 +14,7 @@ import { RapportoProvider } from '../../providers/rapporto/rapporto';
 
 import * as moment from 'moment';
 import 'moment/locale/it';
+import { MenuImmobilePage } from '../menu-immobile/menu-immobile';
 
 /**
  * Generated class for the RapportoPage page.
@@ -60,12 +61,15 @@ export class RapportoPage {
     this.isFetching = true;
     this.rapportoService.list(moment(this.startDate).format('YYYY-MM-DDTHH:mm')).subscribe(response => {
         this.data = response['data'];
-        this.isFetching = false;
+        this.isFetching = false;   
     });
   }
-
-  slideStartChange() {
-
+  /**
+   * 
+   * @param record 
+   */
+  onClickItem(record) {
+    this.navCtrl.push(MenuImmobilePage, { record });
   }
 
   slideDidChange() {

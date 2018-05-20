@@ -5,7 +5,5 @@ class Rapporti {
     public $idContatto;
     public $nominativo;
     public $insertData;
-
-
 }
 ?>

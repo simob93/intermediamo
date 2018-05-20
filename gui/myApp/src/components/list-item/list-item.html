@@ -1,13 +1,21 @@
 <ion-card> 
-    <ion-card-content>
-        <ion-row>
-            <ion-col>
-                <label>{{ formatattedData }}</label>
+    <ion-card-content style="padding: 0px;">
+        <ion-row justify-content-center align-items-center>
+            <ion-col col-2>
+                <div>
+                 <img src="image/home.svg" style="width: 24px !important; heigth: 24px !important;"/>
+                 </div>
+            </ion-col>
+            <ion-col col-3>
+                <label>Ore:{{ data | date:"HH:mm" }}</label>
             </ion-col>
             <ion-col>
-                <label>{{ descrizione }}</label>
+                <label><b>{{ descrizione }}</b></label>
             </ion-col>
-            <ion-col>  
+            <ion-col col-2 style="text-align:right;"> 
+                <button ion-item style="color: #FB8C00" (click) = "clickItem()" >
+                    <ion-icon item-end name="arrow-forward"></ion-icon>  
+                </button>   
             </ion-col>
         </ion-row>
           

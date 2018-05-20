@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { 
+  NavController, 
+  NavParams, 
+  IonicPage } from 'ionic-angular';
+
 import { Http } from '@angular/http';
 import * as constants from '../../standard/costants';
 import 'rxjs/add/operator/map';
@@ -47,9 +52,11 @@ export class EditContattoPage {
       if (!this.standard.isEmpty(this.contatto.nome)) {
           this.contatto.nome =  this.contatto.nome.toUpperCase();
       }
+      
       if (!this.standard.isEmpty(this.contatto.cognome)) {
         this.contatto.cognome =  this.contatto.cognome.toUpperCase();
       }
+
       if (this.standard.isEmpty(id)) {
         this.http.post(constants.API_URL + 'contatti/save', this.contatto).map(res => res.json()).subscribe(risposta => {
             this.standard.showErrorMessage(risposta.message);

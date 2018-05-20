@@ -18,7 +18,7 @@
         <ion-item-divider color="light">{{cont.lettera}}</ion-item-divider>
         
         <ion-item (click)="itemClick(contact)" *ngFor="let contact of cont.contatto">
-            <ion-avatar item-start style="background: #E0F7FA; color:#1565C0; border-radius: 50%; text-align: center;">
+            <ion-avatar class="shadow" item-start style="background: #E0F7FA; color:#1565C0; border-radius: 50%; text-align: center;">
                 <span style="line-height:2.5; font-weight: bold;">{{contact.alias}}</span>     
             </ion-avatar>
             {{contact.nome}} {{contact.cognome}}

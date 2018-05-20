@@ -7,6 +7,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content padding-horizontal margin-top>
+    <div style="display: flex;">
+        <cta-menu 
+            style="width: 50%; height: 90px;"
+            screen="ContattiPage"
+            (onClickCTA)="onClickButton($event)" 
+            descrizione="Nuovo immobile" 
+            icon="house">
+        </cta-menu>
+        <cta-menu 
+            style="width: 50%; height: 90px;" 
+            screen="EditContattoPage"
+            (onClickCTA)="onClickButton($event)" 
+            descrizione="Rubrica"  
+            icon="add-contact"></cta-menu>
+    </div>
+    <div style="display: flex;">
+        <cta-menu 
+            style="width: 50%; height: 90px;"
+            screen="RapportoPage"
+            (onClickCTA)="onClickButton($event)"  
+            descrizione="Rapporto" 
+            icon="search">
+        </cta-menu>
+    </div>
 </ion-content>

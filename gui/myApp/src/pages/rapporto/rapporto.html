@@ -20,14 +20,14 @@
         <b>Storico</b>
       </ion-segment-button>
   </ion-segment>
-  <ion-toolbar>
+  <ion-toolbar color="white" >
       <ion-row>
           <ion-col col-2>
            <img width="24" (click) ="onClickIcon('left')" src="image/left-arrow.svg" />
           </ion-col>
           <ion-col style="text-align: center;">
             <img align="center" width="24" src="image/calendar.svg" />
-            <label style="margin-left: 5px; color: #fff;">{{ startDateFormatted }}</label>
+            <label style="margin-left: 5px;">{{ startDateFormatted }}</label>
           </ion-col>
           <ion-col col-2  style="text-align: right;">
               <img color="orange" (click) ="onClickIcon('right')" width="24" src="image/right-arrow.svg" />
@@ -41,17 +41,25 @@
     <ion-slide>
       
     </ion-slide>
-    <ion-slide>
+    <ion-slide style="overflow-y: auto;display: block;">
 
-      <div *ngIf="isFetching === true">
+      <div *ngIf="isFetching; then fetching else checkRecord"></div>
+
+      <ng-template #fetching>
           <ion-spinner name="bubbles"></ion-spinner>
-      </div>
+      </ng-template>
 
-      <div *ngIf="isFetching === false">
-        <div *ngFor="let item of data">
-          <list-item [data]="item.insertData" [descrizione]="item.nominativo"></list-item>
-        </div>
-      </div>
+      <ng-template #noRecord>
+          Nessun dato trovato
+      </ng-template>
+
+      <ng-template #list>
+          <list-item *ngFor="let item of data" [record]="item" (onClickItem) ="onClickItem($event)" [data]="item.insertData" [descrizione]="item.nominativo"></list-item>  
+      </ng-template>
+
+      <ng-template #checkRecord>
+        <div *ngIf="data && data.length > 0; then list else noRecord"></div>
+      </ng-template>
     
     </ion-slide>
     <ion-slide>
